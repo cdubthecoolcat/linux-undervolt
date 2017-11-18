@@ -5,6 +5,9 @@ Undervolt CPU on Linux
 I take no responsibility for any damage done to your system. This was only tested
 on an Intel i7-6700HQ (My system is a Dell XPS 15 9550)
 
+## Dependencies
+* [msr-tools](https://01.org/msr-tools)
+
 ## Usage
 ```
 usage: undervolt.py [-h] [--cpu-core mV] [--intel-gpu mV] [--cpu-cache mV]
@@ -24,5 +27,5 @@ optional arguments:
 ```
 
 ## Credits
-@[mihic](https://www.github.com/mihic) for writing [this](https://github.com/mihic/linux-intel-undervolt) guide  
-[This](http://forum.notebookreview.com/threads/undervolting-e-g-skylake-in-linux.807953/) forum on notebookreview.com
+* @[mihic](https://www.github.com/mihic) for writing [this](https://github.com/mihic/linux-intel-undervolt) guide
+* [This](http://forum.notebookreview.com/threads/undervolting-e-g-skylake-in-linux.807953/) forum on notebookreview.com
