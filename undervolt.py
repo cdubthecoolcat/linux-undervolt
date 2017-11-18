@@ -55,10 +55,6 @@ if __name__ == '__main__':
 
     a = parser.parse_args()
 
-    if a.check:
-        checkValues()
-        sys.exit(0)
-
     # probably a better way to do this
     indicies = {"0":a.cpu_core, "1":a.intel_gpu, "2":a.cpu_cache, "3":a.system_agent, "4":a.analog_io}
     for key, value in indicies.items():
@@ -67,4 +63,5 @@ if __name__ == '__main__':
     if a.reset:
         for key, value in indicies.items():
             writeValues(0, key)
-
+    if a.check:
+        checkValues()
