@@ -5,6 +5,8 @@ Undervolt CPU on Linux
 I take no responsibility for any damage done to your system. This was only tested
 on an Intel i7-6700HQ (My system is a Dell XPS 15 9550)
 
+For a safer alternative, if you are dual booting Windows, use the [Intel® Extreme Tuning Utility](https://downloadcenter.intel.com/download/24075/Intel-Extreme-Tuning-Utility-Intel-XTU-) and reboot back into Linux.
+
 ## Dependencies
 * [msr-tools](https://01.org/msr-tools)
 
