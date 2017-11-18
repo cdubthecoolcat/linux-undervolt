@@ -24,5 +24,5 @@ optional arguments:
 ```
 
 ## Credits
-@[mihic](https://www.github.com/mihic) for writing [this](https://github.com/mihic/linux-intel-undervolt) guide
+@[mihic](https://www.github.com/mihic) for writing [this](https://github.com/mihic/linux-intel-undervolt) guide  
 [This](http://forum.notebookreview.com/threads/undervolting-e-g-skylake-in-linux.807953/) forum on notebookreview.com
