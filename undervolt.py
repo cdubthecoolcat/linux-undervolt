@@ -6,11 +6,19 @@
 import os
 import sys
 import argparse
-from subprocess import call
+import subprocess
+
+def twos_comp(val, bits):
+    if (val & (1 << (bits - 1))) != 0:
+        val = val - (1 << bits)
+        return val
 
 # convert negative decimal to two's complement hex
-def convertmV(n):
+def convertmVtoHex(n):
     return format(0xFFE00000&( (round(n*1.024)&0xFFF) <<21), '08x')
+
+def convertHextomV(n):
+    return round(twos_comp(int(hex(n >>21), 16), 11) / 1.024)
 
 def writeValues(value, index):
     if int(value) > 0:
@@ -21,24 +29,29 @@ def writeValues(value, index):
     constant = 80000
     single_const = 1
     read_write = 1
-    offset = convertmV(int(value))
+    offset = convertmVtoHex(int(value))
     val = "0x" + str(constant) + str(index) + str(single_const) + str(read_write) + offset
     # still need to figure out how to write to register without dependencies
-    call(["wrmsr", msr_register, val])
+    subprocess.call(["wrmsr", msr_register, val])
 
 def checkValues():
     msr_register = "0x150"
     constant = 80000
     single_const = 1
     read_write = 0
-    offset = convertmV(0)
+    offset = convertmVtoHex(0)
     for x in range(0, 5):
         value = "0x" + str(constant) + str(x) + str(single_const) + str(read_write) + str(offset)
         # still need to figure out how to write to register without dependencies
-        call(["wrmsr", msr_register, value])
+        subprocess.call(["wrmsr", msr_register, value])
         print(str(x) + ":")
         # still need to figure out how to read from register without dependencies
-        call(["rdmsr", msr_register])
+        p = subprocess.Popen(["rdmsr", msr_register], stdout=subprocess.PIPE)
+        out, err = p.communicate()
+        out = out.decode('utf-8').rstrip()
+        if err is not None:
+            print(err)
+        print(str(out) + " --> " + str(convertHextomV(int(out, 16))))
 
 if __name__ == '__main__':
     if os.getuid() != 0:
