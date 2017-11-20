@@ -4,16 +4,19 @@
 # uses msr-tools which can be found here: https://01.org/msr-tools
 
 import os
+import glob
 import struct
 import sys
 import argparse
 
 def writemsr(msr, val):
-    f = os.open('/dev/cpu/0/msr', os.O_WRONLY)
-    os.lseek(f, msr, os.SEEK_SET)
-    os.write(f, struct.pack('Q', val))
-    os.close(f)
-    if not '/dev/cpu/0/msr':
+    n = glob.glob('/dev/cpu/[0-9]*/msr')
+    for c in n:
+        f = os.open(c, os.O_WRONLY)
+        os.lseek(f, msr, os.SEEK_SET)
+        os.write(f, struct.pack('Q', val))
+        os.close(f)
+    if not n:
         raise OSError("msr module not loaded (run modprobe msr)")
 
 def readmsr(msr, cpu = 0):
@@ -31,7 +34,7 @@ def convertmVtoHex(n):
 def convertHextomV(n):
     if n is 0:
         return 0
-    return ~ round((((n >>21) ^ 0xFFF) - 2048) / 1.024)
+    return ~ round((((n >>21) ^ 0xFFF) - 2048) / 1.024) # only works for negative numbers lol hopefully that's good enough
 
 def writeValues(value, index):
     if int(value) > 0:
