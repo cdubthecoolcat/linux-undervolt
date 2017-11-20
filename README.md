@@ -10,7 +10,12 @@ For a safer alternative, if you are dual booting Windows, use the [Intel® Extre
 ## Dependencies
 * [msr-tools](https://01.org/msr-tools)
 
-## Usage
+## Instructions
+Make sure you have the msr module loaded.
+```shell
+modprobe msr
+```
+### Usage
 ```
 usage: undervolt.py [-h] [--cpu-core mV] [--intel-gpu mV] [--cpu-cache mV]
                     [--system-agent mV] [--analog-io mV] [-r] [-c]
@@ -30,4 +35,5 @@ optional arguments:
 
 ## Credits
 * @[mihic](https://www.github.com/mihic) for writing [this](https://github.com/mihic/linux-intel-undervolt) guide
+* @[andikleen](https://github.com/andikleen) for his python msr [functions](https://github.com/andikleen/pmu-tools/blob/master/msr.py)
 * [This](http://forum.notebookreview.com/threads/undervolting-e-g-skylake-in-linux.807953/) forum on notebookreview.com
