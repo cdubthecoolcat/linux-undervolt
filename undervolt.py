@@ -29,6 +29,8 @@ def convertmVtoHex(n):
 
 # convert two's complement hex to negative decimal
 def convertHextomV(n):
+    if n is 0:
+        return 0
     return ~ round((((n >>21) ^ 0xFFF) - 2048) / 1.024)
 
 def writeValues(value, index):
@@ -43,8 +45,7 @@ def writeValues(value, index):
     offset = convertmVtoHex(int(value))
 
     val = "0x" + str(constant) + str(index) + str(single_const) + str(read_write) + offset
-    print(val)
-    writemsr(msr_register, val)
+    writemsr(msr_register, int(val, 16))
 
 def checkValues():
     msr_register = 0x150
