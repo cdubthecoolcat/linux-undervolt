@@ -71,6 +71,7 @@ if __name__ == '__main__':
     parser.add_argument('--cpu-cache', metavar='mV', help='undervolt the cpu cache', action='store')
     parser.add_argument('--system-agent', metavar='mV', help='undervolt the system agent', action='store')
     parser.add_argument('--analog-io', metavar='mV', help='undervolt the analog I/O', action='store')
+    parser.add_argument('-l', '--list', nargs=5, type=int, help='apply undervolt as list in the above order', action='store')
     parser.add_argument('-r', '--reset', help='reset voltages', action='store_true')
     parser.add_argument('-c', '--check', help='check undervoltage', action='store_true')
 
@@ -82,13 +83,18 @@ if __name__ == '__main__':
 
     # probably a better way to do this
     indicies = {"0":a.cpu_core, "1":a.intel_gpu, "2":a.cpu_cache, "3":a.system_agent, "4":a.analog_io}
-    for key, value in indicies.items():
-        if value is not None:
-            writeValues(value, key)
+
+    if a.check:
+        checkValues()
+        sys.exit()
 
     if a.reset:
         for key, value in indicies.items():
             writeValues(0, key)
+        sys.exit()
 
-    if a.check:
-        checkValues()
+    for key, value in indicies.items():
+        if value is not None:
+            writeValues(value, key)
+        else:
+            writeValues(a.list[int(key)], key)
