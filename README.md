@@ -29,6 +29,7 @@ optional arguments:
   --cpu-cache mV     undervolt the cpu cache
   --system-agent mV  undervolt the system agent
   --analog-io mV     undervolt the analog I/O
+  -l, --list         apply undervolt as list in the above order
   -r, --reset        reset voltages
   -c, --check        check undervoltage
 ```

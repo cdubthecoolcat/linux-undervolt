@@ -71,7 +71,7 @@ if __name__ == '__main__':
     parser.add_argument('--cpu-cache', metavar='mV', help='undervolt the cpu cache', action='store')
     parser.add_argument('--system-agent', metavar='mV', help='undervolt the system agent', action='store')
     parser.add_argument('--analog-io', metavar='mV', help='undervolt the analog I/O', action='store')
-    parser.add_argument('-l', '--list', nargs=5, type=int, help='apply undervolt as list in the above order', action='store')
+    parser.add_argument('-l', '--list', metavar='\b', nargs=5, type=int, help='apply undervolt as list in the above order', action='store')
     parser.add_argument('-r', '--reset', help='reset voltages', action='store_true')
     parser.add_argument('-c', '--check', help='check undervoltage', action='store_true')
 
