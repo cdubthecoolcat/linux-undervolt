@@ -96,5 +96,5 @@ if __name__ == '__main__':
     for key, value in indicies.items():
         if value is not None:
             writeValues(value, key)
-        else:
+        elif a.list is not None:
             writeValues(a.list[int(key)], key)
