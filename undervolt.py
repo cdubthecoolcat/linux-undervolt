@@ -77,8 +77,8 @@ if __name__ == '__main__':
 
     if len(sys.argv)==1:
         parser.print_help()
-        sys.exit(1) 
-    
+        sys.exit(1)
+
     a = parser.parse_args()
 
     if os.getuid() != 0:
