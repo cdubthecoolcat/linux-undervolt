@@ -34,7 +34,7 @@ def convertmVtoHex(n):
 def convertHextomV(n):
     if n is 0:
         return 0
-    return ~ round((((n >>21) ^ 0xFFF) - 2048) / 1.024) # only works for negative numbers lol hopefully that's good enough
+    return ~ round((((n >> 21) ^ 0xFFF) - 2048) / 1.024) # only works for negative numbers lol hopefully that's good enough
 
 def writeValues(value, index):
     if int(value) > 0:
@@ -75,6 +75,10 @@ if __name__ == '__main__':
     parser.add_argument('-r', '--reset', help='reset voltages', action='store_true')
     parser.add_argument('-c', '--check', help='check undervoltage', action='store_true')
 
+    if len(sys.argv)==1:
+        parser.print_help()
+        sys.exit(1) 
+    
     a = parser.parse_args()
 
     if os.getuid() != 0:
