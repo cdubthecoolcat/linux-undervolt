@@ -4,11 +4,11 @@
 # http://forum.notebookreview.com/threads/undervolting-e-g-skylake-in-linux.807953/
 # uses msr-tools which can be found here: https://01.org/msr-tools
 
-import os
+import argparse
 import glob
+import os
 import struct
 import sys
-import argparse
 
 
 def writemsr(msr, val):
